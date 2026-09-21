@@ -1,0 +1,3 @@
+export function AdminTable({ columns, rows, rowKey, emptyMessage = 'Nothing to show yet.' }) {
+  return <div className="admin-table-wrap"><table className="admin-table"><thead><tr>{columns.map((column) => <th scope="col" key={column.key}>{column.label}</th>)}</tr></thead><tbody>{rows.length ? rows.map((row, index) => <tr key={rowKey ? rowKey(row) : row.id || index}>{columns.map((column) => <td key={column.key} data-label={column.label}>{column.render ? column.render(row) : row[column.key]}</td>)}</tr>) : <tr><td className="admin-table-empty" colSpan={columns.length}>{emptyMessage}</td></tr>}</tbody></table></div>;
+}

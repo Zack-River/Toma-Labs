@@ -1,0 +1,3 @@
+export function ShopCategoryNav({ categories, selectedCategory, onSelect }) {
+  return <nav className="shop-category-nav" aria-label="Shop categories">{categories.map((category) => <button className={`shop-category-card${selectedCategory === category.id ? ' active' : ''}`} type="button" key={category.id} onClick={() => onSelect(category.id)} aria-pressed={selectedCategory === category.id}><span className="shop-category-art" style={{ '--category-tone': category.tone }} aria-hidden="true"><i></i><b>{category.number}</b></span><span className="shop-category-copy"><small>{category.number} / CATEGORY</small><strong>{category.label}</strong><em>{category.shortLabel}</em></span><span className="shop-category-arrow" aria-hidden="true">↗</span></button>)}</nav>;
+}

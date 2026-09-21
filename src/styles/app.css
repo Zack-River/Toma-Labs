@@ -1,0 +1,21 @@
+/* React shell overrides the legacy static selectors while keeping the TOMA design system intact. */
+:root { --ink: #15100d; --espresso: #1d120e; --roast: #5a321e; --parchment: #eee2cc; --cream: #faf5eb; --brass: #b8894a; --brass-light: #d8b173; --muted: #987f68; --muted-dark: #76614f; --leaf: #3e4b38; --line: rgba(29, 18, 14, .18); }
+#root { min-height: 100vh; }
+body { min-width: 320px; background: var(--cream); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; }
+body.home-page { background: var(--ink); color: var(--cream); }
+body.blend-page, body.account-page, body.cart-page { background: var(--cream); color: var(--ink); }
+.hero { background-image: linear-gradient(90deg, rgba(17, 11, 7, .96) 0%, rgba(17, 11, 7, .88) 27%, rgba(17, 11, 7, .38) 63%, rgba(17, 11, 7, .28) 100%), url('/assets/toma-hero-v2.png'); }
+.route-page { min-height: 100vh; }
+.react-toast { position: fixed; right: 24px; bottom: 24px; z-index: 50; max-width: 360px; padding: 14px 18px; background: var(--cream); color: var(--ink); box-shadow: 0 20px 70px rgba(20, 10, 4, .22); font-size: 12px; transform: translateY(20px); opacity: 0; pointer-events: none; transition: opacity .24s, transform .24s; }
+.react-toast.show { transform: translateY(0); opacity: 1; }
+.react-auth-shell .account-art, .react-auth-shell .auth-panel { min-height: 0; }
+.react-auth-shell .auth-panel { align-self: center; }
+.react-cart-shell .cart-main { min-height: calc(100vh - 74px); }
+.react-cart-shell .cart-line h2 { overflow-wrap: anywhere; }
+.react-cart-shell .summary-account-link { padding: 0; border: 0; background: transparent; color: var(--brass-light); cursor: pointer; font: inherit; text-decoration: underline; }
+.react-home .brand, .react-home .bag-button { text-decoration: none; }
+.react-home .home-footer { margin-top: 0; }
+select:focus-visible, textarea:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }

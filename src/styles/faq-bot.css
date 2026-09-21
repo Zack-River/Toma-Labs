@@ -1,0 +1,63 @@
+.faq-bot {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 12px;
+}
+
+.faq-bot-panel {
+  width: min(355px, calc(100vw - 34px));
+  max-height: min(610px, calc(100vh - 120px));
+  overflow-y: auto;
+  padding: 21px;
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid rgba(184, 137, 74, .48);
+  border-top: 3px solid var(--brass);
+  box-shadow: 0 22px 60px rgba(20, 10, 4, .28);
+  animation: faq-bot-enter .2s ease-out;
+}
+
+.faq-bot-panel-header { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
+.faq-bot-eyebrow { margin: 0; color: var(--roast); font: 500 9px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.faq-bot-panel h2 { margin: 8px 0 0; color: var(--espresso); font: 500 35px/.95 var(--serif); letter-spacing: -.05em; }
+.faq-bot-close { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--line); background: transparent; color: var(--roast); font-size: 22px; line-height: 1; cursor: pointer; }
+.faq-bot-close:hover { border-color: var(--brass); background: var(--parchment); }
+.faq-bot-intro { margin: 16px 0 18px; color: var(--muted-dark); font-size: 12px; line-height: 1.55; }
+.faq-bot-list { border-top: 1px solid var(--line); }
+.faq-bot-item { border-bottom: 1px solid var(--line); }
+.faq-bot-question { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 49px; padding: 12px 0; border: 0; background: transparent; color: var(--espresso); font: 600 12px/1.35 var(--sans); text-align: left; cursor: pointer; }
+.faq-bot-question:hover { color: var(--roast); }
+.faq-bot-question b { flex: 0 0 auto; color: var(--brass); font: 400 22px/1 var(--sans); }
+.faq-bot-answer { margin: -2px 0 15px; padding-right: 23px; color: var(--muted-dark); font-size: 11px; line-height: 1.6; }
+.faq-bot-whatsapp { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 46px; margin-top: 17px; padding: 12px 14px; background: #adcf91; color: #1e2b1a; font-size: 11px; font-weight: 700; }
+.faq-bot-whatsapp:hover { background: #c1e1a3; transform: translateY(-1px); }
+.faq-bot-whatsapp > span:last-child { font-size: 18px; }
+.faq-bot-trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 12px 8px 9px; border: 1px solid rgba(216, 177, 115, .72); background: var(--espresso); color: var(--cream); box-shadow: 0 12px 28px rgba(0, 0, 0, .22); font: 600 10px var(--mono); letter-spacing: .08em; cursor: pointer; }
+.faq-bot-trigger:hover, .faq-bot.is-open .faq-bot-trigger { background: var(--roast); color: var(--brass-light); transform: translateY(-2px); }
+.faq-bot-face { position: relative; display: grid; grid-template-columns: repeat(2, 4px); justify-content: center; align-items: center; gap: 4px; width: 28px; height: 28px; border: 1px solid currentColor; border-radius: 8px; }
+.faq-bot-face::before { content: ''; position: absolute; top: -6px; left: 50%; width: 1px; height: 5px; background: currentColor; }
+.faq-bot-face::after { content: ''; position: absolute; top: -8px; left: calc(50% - 2px); width: 4px; height: 4px; border: 1px solid currentColor; border-radius: 50%; }
+.faq-bot-face i { display: block; width: 4px; height: 4px; background: currentColor; border-radius: 50%; }
+.faq-bot-face b { position: absolute; bottom: 5px; left: 8px; width: 10px; height: 1px; background: currentColor; }
+
+@keyframes faq-bot-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* The FAQ assistant replaces the old WhatsApp floating pill. */
+.whatsapp-cta { display: none !important; }
+
+@media (max-width: 560px) {
+  .faq-bot { right: 16px; bottom: 16px; }
+  .faq-bot-panel { padding: 18px; max-height: calc(100vh - 105px); }
+  .faq-bot-trigger { min-height: 52px; }
+  .faq-bot-trigger-label { display: none; }
+  body.blend-page .faq-bot { bottom: 92px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-bot-panel { animation: none; }
+}

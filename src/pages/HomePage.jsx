@@ -1,0 +1,47 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CatalogLink } from '../components/catalog/CatalogLink.jsx';
+import { StoreFooter } from '../components/StoreFooter.jsx';
+import { StoreHeader } from '../components/StoreHeader.jsx';
+import { useStorefront } from '../context/StorefrontContext.jsx';
+import { GOALS } from '../lib/blend-rules.js';
+import { formatCurrency } from '../lib/pricing.js';
+import { PRODUCTS } from '../lib/storefront-state.js';
+import { SHOP_PRODUCTS } from '../lib/shop-data.js';
+import { STORE_CONFIG } from '../lib/store-config.js';
+
+const MOMENT_COPY = {
+  morning: { title: 'Start with a clear, dependable cup.', copy: 'Turbo Mode is the first recommendation for a morning routine: freshly ground Turkish coffee with a full, familiar character.', tag: `Turbo Mode / ${formatCurrency(PRODUCTS.turboMode.unitPrice)}`, guide: 'Keep the coffee clear.' },
+  work: { title: 'Choose a fuller, balanced routine.', copy: 'Start with a stronger body and a finish that stays present through a longer coffee moment.', tag: 'TOMA starting blend / guided', guide: 'Build body before adding aroma.' },
+  'after-lunch': { title: 'Keep the cup lighter after lunch.', copy: 'A cleaner direction lets aroma lead while the coffee stays easy to finish.', tag: 'Light direction / guided', guide: 'Let aroma do the work.' },
+  gathering: { title: 'Choose a cup people can share.', copy: 'A familiar, balanced profile makes the blend easier to prepare and enjoy around a table.', tag: 'Social blend / guided', guide: 'Balance travels well.' },
+  quiet: { title: 'Give the ritual more room.', copy: 'A slower, more sensory direction puts aroma and character at the centre of the cup.', tag: 'Sensory direction / guided', guide: 'Protect the finish.' },
+  discover: { title: 'Try something different with a reason.', copy: 'TOMA can guide you toward a new profile and explain what will change before you commit.', tag: 'Discovery path / guided', guide: 'Change one variable at a time.' },
+};
+
+const TURBO_PRODUCT = SHOP_PRODUCTS.find((product) => product.id === 'turbo-mode-50g');
+
+export function HomePage() {
+  const { addLine, showToast } = useStorefront();
+  const [goalId, setGoalId] = useState('morning');
+  const moment = MOMENT_COPY[goalId];
+
+  function addTurboMode() {
+    addLine(PRODUCTS.turboMode);
+    showToast('Turbo Mode added to your bag.');
+  }
+
+  return <div className="react-home route-page">
+    <StoreHeader />
+    <main id="main-content">
+      <section className="hero"><div className="hero-inner wrap"><div className="hero-copy"><p className="kicker">TOMA COFFEE / NEW DROP 01</p><h1>Turkish coffee<br /><em>with a little more drive.</em></h1><p className="hero-lede">Meet Turbo Mode: freshly ground Egyptian Turkish coffee blended with Korean red ginseng. A TOMA original for a stronger daily ritual, made with the care of twelve years in coffee.</p><div className="hero-actions"><CatalogLink className="button button-brass" item={TURBO_PRODUCT}>Shop Turbo Mode <span>{formatCurrency(PRODUCTS.turboMode.unitPrice)}</span> <i>↗</i></CatalogLink><Link className="button button-line" to="/blend-lab">Build your blend <i>↗</i></Link></div><div className="hero-proof"><span><b>50g</b> pack</span><span>Freshly ground</span><span>Made in Egypt</span></div></div><div className="hero-art-note"><span className="note-line"></span><span>FRESH / HOT / SELECTED</span></div><CatalogLink className="hero-pack-label" item={TURBO_PRODUCT} ariaLabel="View TOMA Turbo Mode"><img src="/assets/toma-bean-mark.png" alt="TOMA" /><div><strong>toma</strong><small>TURBO MODE</small><em>50g · TURKISH COFFEE</em></div></CatalogLink><div className="scroll-cue"><span>Scroll to explore</span><i>↓</i></div></div></section>
+      <section className="trust-rail"><div className="wrap trust-grid"><div><span className="trust-index">01</span><strong>12 years in coffee</strong><p>Experience turned into a repeatable standard.</p></div><div><span className="trust-index">02</span><strong>Ready to choose</strong><p>Clear products, prices, ingredients, and formats.</p></div><div><span className="trust-index">03</span><strong>Made to become yours</strong><p>Guided blends shaped around your taste.</p></div></div></section>
+      <section id="shop" className="section shop-section wrap"><div className="section-heading"><div><p className="kicker">SHOP THE NEWEST DROP</p><h2>One excellent<br /><em>place to start.</em></h2></div><p className="section-intro">Start with a product TOMA already knows how to make well. Then, when you know your taste, make the next cup yours.</p></div><div className="shop-layout"><article className="product-feature"><CatalogLink className="product-visual product-visual-link" item={TURBO_PRODUCT} ariaLabel={`View ${TURBO_PRODUCT.name}`}><img src="/assets/toma-turbo-mode.jpg" alt="TOMA Turbo Mode coffee pack" /><span className="product-badge">AVAILABLE NOW</span></CatalogLink><div className="product-details"><p className="product-type">TURKISH COFFEE / RED GINSENG</p><div className="product-title-row"><h3><CatalogLink item={TURBO_PRODUCT}>{TURBO_PRODUCT.name}</CatalogLink></h3><span className="product-price">{formatCurrency(PRODUCTS.turboMode.unitPrice)}</span></div><p>Freshly ground Egyptian Turkish coffee with Korean red ginseng. A special TOMA blend with an authentic Turkish cup character.</p><div className="product-meta"><span><small>PACK</small>50g</span><span><small>ORIGIN</small>Made in Egypt</span><span><small>FULFILMENT</small>{STORE_CONFIG.fulfillmentLabel}</span></div><button className="button button-brass add-product" type="button" onClick={addTurboMode}>Add Turbo Mode <span>{formatCurrency(PRODUCTS.turboMode.unitPrice)}</span> <i>+</i></button></div></article><aside className="drop-aside"><p className="kicker">THE NEXT RELEASE</p><h3>More from<br /><em>the lab.</em></h3><p>New TOMA releases will join the collection as each one earns its place. Follow the lab for what comes next.</p><a className="arrow-link" href="https://www.instagram.com/tomacofee/" target="_blank" rel="noreferrer">Follow @tomacofee <span>↗</span></a><div className="aside-mark">TOMA<br /><span>LAB / 01</span></div></aside></div></section>
+      <section id="moments" className="section moments-section"><div className="wrap"><div className="section-heading compact"><div><p className="kicker">FIND YOUR COFFEE</p><h2>What are you<br /><em>making coffee for?</em></h2></div><div><p className="section-intro">TOMA starts with your moment, then points you toward a taste and format that makes sense.</p><Link className="arrow-link" to="/find-your-coffee">Explore all directions <span>↗</span></Link></div></div><div className="moment-grid">{GOALS.map((goal) => <button className={`moment-card${goal.id === goalId ? ' active' : ''}`} type="button" key={goal.id} onClick={() => setGoalId(goal.id)} aria-pressed={goal.id === goalId}><span>{goal.number}</span><strong>{goal.label}</strong><small>{goal.shortLabel}</small></button>)}</div><div className="recommendation" aria-live="polite"><div><p className="kicker">TOMA STARTING POINT</p><h3>{moment.title}</h3><p>{moment.copy}</p></div><div className="recommendation-actions"><span>{moment.tag}</span><Link className="arrow-link" to="/shop">View the shop <span>↗</span></Link><Link className="arrow-link muted-link" to="/blend-lab">Customize it <span>↗</span></Link></div></div></div></section>
+      <section id="blend-lab" className="section blend-section wrap"><div className="blend-head"><div><p className="kicker">TOMA BLEND LAB / REACT ROUTE</p><h2>Your cup.<br /><em>Your signature.</em></h2></div><div className="blend-head-copy"><p>TOMA does not leave you alone with a list of ingredients. You choose a direction. TOMA Guide keeps the cup balanced.</p><Link className="arrow-link" to="/blend-lab">Open the Blend Lab <span>↗</span></Link></div></div></section>
+      <section id="standard" className="section standard-section"><div className="wrap"><div className="standard-grid"><div><p className="kicker">THE TOMA STANDARD</p><h2>Experience becomes<br /><em>trust when it repeats.</em></h2></div><div className="standard-copy"><p>TOMA is shaped by around twelve years of making, testing, and refining coffee. The website turns that experience into something useful at the moment of choice.</p><Link className="arrow-link" to="/why-toma">See how TOMA works <span>↗</span></Link></div></div><div id="why" className="standard-list"><article><span>01</span><h3>Select with intent</h3><p>Every ingredient and product earns its place through aroma, clarity, and character.</p></article><article><span>02</span><h3>Test before release</h3><p>Experience matters when it becomes a standard customers can feel in every cup.</p></article><article><span>03</span><h3>Make choosing easier</h3><p>Clear details and guided suggestions remove guesswork from the shelf.</p></article></div></div></section>
+      <section className="closing"><div className="wrap closing-inner"><div><p className="kicker">READY TO CHOOSE?</p><h2>Buy something excellent.<br /><em>Then make one yours.</em></h2></div><Link className="button button-brass" to="/shop">Shop TOMA <i>↗</i></Link></div></section>
+    </main>
+    <StoreFooter />
+  </div>;
+}
