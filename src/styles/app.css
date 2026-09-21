@@ -1,6 +1,7 @@
 /* React shell overrides the legacy static selectors while keeping the TOMA design system intact. */
 :root { --ink: #15100d; --espresso: #1d120e; --roast: #5a321e; --parchment: #eee2cc; --cream: #faf5eb; --brass: #b8894a; --brass-light: #d8b173; --muted: #987f68; --muted-dark: #76614f; --leaf: #3e4b38; --line: rgba(29, 18, 14, .18); }
 #root { min-height: 100vh; }
+.toma-icon { display: inline-block; flex: 0 0 auto; width: 1em; height: 1em; vertical-align: -.125em; }
 body { min-width: 320px; background: var(--cream); color: var(--ink); }
 a { color: inherit; text-decoration: none; }
 a:focus-visible { outline: 2px solid var(--brass); outline-offset: 4px; }

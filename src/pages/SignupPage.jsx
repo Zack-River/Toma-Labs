@@ -3,6 +3,8 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout.jsx';
 import { useStorefront } from '../context/StorefrontContext.jsx';
 import { safeReturnPath, signUp, validatePassword } from '../lib/storefront-state.js';
+import { TomaIcon } from '../components/TomaIcon.jsx';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 export function SignupPage() {
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ export function SignupPage() {
     <p className="eyebrow">TOMA account / Join</p>
     <h2 id="auth-title">Start your<br /><em>coffee record.</em></h2>
     <p className="auth-lede">Create a lightweight account so your blend journey can follow you from the lab to the bag.</p>
-    <div className="prototype-note"><span aria-hidden="true">i</span><p><strong>Demo account flow.</strong> This static MVP stores only a local demo profile. Connect a real auth provider before launch.</p></div>
+    <div className="prototype-note"><TomaIcon icon={faCircleInfo} /><p><strong>Demo account flow.</strong> This static MVP stores only a local demo profile. Connect a real auth provider before launch.</p></div>
     <form className="auth-form" onSubmit={handleSubmit} noValidate>
       <div className="field-row"><div className="field"><label htmlFor="signup-first-name">First name</label><input id="signup-first-name" name="firstName" type="text" autoComplete="given-name" required placeholder="First name" /></div><div className="field"><label htmlFor="signup-last-name">Last name</label><input id="signup-last-name" name="lastName" type="text" autoComplete="family-name" required placeholder="Last name" /></div></div>
       <div className="field"><label htmlFor="signup-email">Email address</label><input id="signup-email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" /></div>

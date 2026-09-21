@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { TomaIcon } from '../TomaIcon.jsx';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export const ADMIN_TABS = Object.freeze([
   { id: 'overview', label: 'Overview', shortLabel: 'Stats & analytics' },
@@ -17,7 +19,7 @@ export function AdminShell({ activeTab, onTabChange, children }) {
       <nav className="admin-tab-list" aria-label="Admin sections" role="tablist">
         {ADMIN_TABS.map((tab) => <button className={`admin-tab${activeTab === tab.id ? ' is-active' : ''}`} type="button" role="tab" aria-selected={activeTab === tab.id} key={tab.id} onClick={() => onTabChange(tab.id)}><span>{tab.label}</span><small>{tab.shortLabel}</small></button>)}
       </nav>
-      <div className="admin-sidebar-footer"><span>Demo workspace</span><Link to="/shop">Back to storefront ↗</Link></div>
+      <div className="admin-sidebar-footer"><span>Demo workspace</span><Link to="/shop">Back to storefront <TomaIcon icon={faArrowUpRightFromSquare} /></Link></div>
     </aside>
     <main className="admin-main" id="admin-main-content">{children}</main>
   </div>;

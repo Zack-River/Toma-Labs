@@ -32,11 +32,11 @@
 .faq-bot-item { border-bottom: 1px solid var(--line); }
 .faq-bot-question { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 49px; padding: 12px 0; border: 0; background: transparent; color: var(--espresso); font: 600 12px/1.35 var(--sans); text-align: left; cursor: pointer; }
 .faq-bot-question:hover { color: var(--roast); }
-.faq-bot-question b { flex: 0 0 auto; color: var(--brass); font: 400 22px/1 var(--sans); }
+.faq-bot-question .toma-icon { flex: 0 0 auto; width: 15px; height: 15px; color: var(--brass); }
 .faq-bot-answer { margin: -2px 0 15px; padding-right: 23px; color: var(--muted-dark); font-size: 11px; line-height: 1.6; }
 .faq-bot-whatsapp { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 46px; margin-top: 17px; padding: 12px 14px; background: #adcf91; color: #1e2b1a; font-size: 11px; font-weight: 700; }
 .faq-bot-whatsapp:hover { background: #c1e1a3; transform: translateY(-1px); }
-.faq-bot-whatsapp > span:last-child { font-size: 18px; }
+.faq-bot-whatsapp > .toma-icon { width: 18px; height: 18px; }
 .faq-bot-trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 12px 8px 9px; border: 1px solid rgba(216, 177, 115, .72); background: var(--espresso); color: var(--cream); box-shadow: 0 12px 28px rgba(0, 0, 0, .22); font: 600 10px var(--mono); letter-spacing: .08em; cursor: pointer; }
 .faq-bot-trigger:hover, .faq-bot.is-open .faq-bot-trigger { background: var(--roast); color: var(--brass-light); transform: translateY(-2px); }
 .faq-bot-face { position: relative; display: grid; grid-template-columns: repeat(2, 4px); justify-content: center; align-items: center; gap: 4px; width: 28px; height: 28px; border: 1px solid currentColor; border-radius: 8px; }

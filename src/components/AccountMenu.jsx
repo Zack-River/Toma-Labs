@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStorefront } from '../context/StorefrontContext.jsx';
+import { TomaIcon } from './TomaIcon.jsx';
+import { faArrowUpRightFromSquare, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export function AccountMenu() {
   const navigate = useNavigate();
@@ -51,13 +53,13 @@ export function AccountMenu() {
     >
       <span className="toma-account-avatar" aria-hidden="true">{initials || 'U'}</span>
       <span className="toma-account-name">Hi, {session.firstName}</span>
-      <span className="toma-account-chevron" aria-hidden="true">⌄</span>
+      <TomaIcon icon={faChevronDown} className="toma-account-chevron" />
     </button>
     {open ? <div className="toma-account-dropdown" role="menu" aria-label="Account options">
-      <Link role="menuitem" to="/profile" onClick={() => setOpen(false)}>Profile <span aria-hidden="true">↗</span></Link>
-      <Link role="menuitem" to="/profile#settings" onClick={() => setOpen(false)}>Settings <span aria-hidden="true">↗</span></Link>
-      <Link role="menuitem" to="/admin" onClick={() => setOpen(false)}>Admin panel <span aria-hidden="true">↗</span></Link>
-      <button role="menuitem" type="button" onClick={handleSignOut}>Log out <span aria-hidden="true">↗</span></button>
+      <Link role="menuitem" to="/profile" onClick={() => setOpen(false)}>Profile <TomaIcon icon={faArrowUpRightFromSquare} /></Link>
+      <Link role="menuitem" to="/profile#settings" onClick={() => setOpen(false)}>Settings <TomaIcon icon={faArrowUpRightFromSquare} /></Link>
+      <Link role="menuitem" to="/admin" onClick={() => setOpen(false)}>Admin panel <TomaIcon icon={faArrowUpRightFromSquare} /></Link>
+      <button role="menuitem" type="button" onClick={handleSignOut}>Log out <TomaIcon icon={faArrowUpRightFromSquare} /></button>
     </div> : null}
   </div>;
 }

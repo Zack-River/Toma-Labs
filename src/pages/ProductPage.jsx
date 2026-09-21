@@ -4,6 +4,8 @@ import { StoreHeader } from '../components/StoreHeader.jsx';
 import { useStorefront } from '../context/StorefrontContext.jsx';
 import { getCatalogItem } from '../lib/catalog.js';
 import { STORE_CONFIG } from '../lib/store-config.js';
+import { TomaIcon } from '../components/TomaIcon.jsx';
+import { faArrowLeft, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 const BREW_GUIDANCE = Object.freeze({
   everyday: 'A dependable daily cup. Brew it the way your morning already knows.',
@@ -43,13 +45,13 @@ export function ProductPage() {
       <section className="product-detail-hero">
         <div className="product-detail-art"><img src={product.image} alt={`${product.name} product scene`} /><span>{product.badge}</span></div>
         <div className="product-detail-copy">
-          <Link className="product-back-link" to="/shop">← Back to the shelf</Link>
+          <Link className="product-back-link" to="/shop"><TomaIcon icon={faArrowLeft} /> Back to the shelf</Link>
           <p className="shop-eyebrow">{product.categoryLabel || 'TOMA collection'}</p>
           <h1>{product.name}</h1>
           <p className="product-detail-subtitle">{product.subtitle}</p>
           <p className="product-detail-description">{product.description}</p>
           <div className="product-detail-price"><strong>{product.priceLabel}</strong><span>{details.format}</span></div>
-          <button className="button button-brass" type="button" onClick={addProduct}>Add to bag <span aria-hidden="true">↗</span></button>
+          <button className="button button-brass" type="button" onClick={addProduct}>Add to bag <TomaIcon icon={faArrowUpRightFromSquare} /></button>
         </div>
       </section>
       <section className="product-detail-information" aria-labelledby="product-information-title">
@@ -61,7 +63,7 @@ export function ProductPage() {
           <article><span>DELIVERY</span><h3>Availability</h3><p>{details.availability}</p></article>
         </div>
       </section>
-      <section className="product-detail-next"><div><p className="shop-eyebrow">Still deciding?</p><h2>Find the direction<br /><em>that fits your moment.</em></h2></div><div className="destination-actions"><Link className="button button-brass" to="/find-your-coffee">Find your coffee <span aria-hidden="true">↗</span></Link><Link className="button button-line" to="/blend-lab">Make a custom blend <span aria-hidden="true">↗</span></Link></div></section>
+      <section className="product-detail-next"><div><p className="shop-eyebrow">Still deciding?</p><h2>Find the direction<br /><em>that fits your moment.</em></h2></div><div className="destination-actions"><Link className="button button-brass" to="/find-your-coffee">Find your coffee <TomaIcon icon={faArrowUpRightFromSquare} /></Link><Link className="button button-line" to="/blend-lab">Make a custom blend <TomaIcon icon={faArrowUpRightFromSquare} /></Link></div></section>
     </main>
     <StoreFooter />
   </div>;

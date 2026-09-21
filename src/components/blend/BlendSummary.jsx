@@ -1,3 +1,6 @@
+import { TomaIcon } from '../TomaIcon.jsx';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+
 export function BlendSummary({ draft, labels, quote, onAdd, onShare }) {
   const name = draft.blendName?.trim() || 'Your Blend';
   return <aside className="summary-card" aria-labelledby="summary-title" aria-live="polite">
@@ -10,7 +13,7 @@ export function BlendSummary({ draft, labels, quote, onAdd, onShare }) {
     </dl>
     <div className="summary-total"><span>Current blend price</span><strong>{quote.priceLabel}</strong><small>{quote.currencyLabel} · guide estimate</small></div>
     <div className="summary-logistics"><span>Preparation <b>{quote.preparationTime}</b></span><span>Delivery <b>{quote.deliveryRule}</b></span></div>
-    <div className="summary-actions"><button className="button summary-button" type="button" disabled={!quote.valid} onClick={onAdd}>Add my blend to bag <span aria-hidden="true">↗</span></button><button className="secondary-action" type="button" onClick={onShare}>Share this draft <span aria-hidden="true">↗</span></button></div>
+    <div className="summary-actions"><button className="button summary-button" type="button" disabled={!quote.valid} onClick={onAdd}>Add my blend to bag <TomaIcon icon={faArrowUpRightFromSquare} /></button><button className="secondary-action" type="button" onClick={onShare}>Share this draft <TomaIcon icon={faArrowUpRightFromSquare} /></button></div>
     {!quote.valid ? <p className="summary-footnote" role="alert">{quote.errors.join(' ')}</p> : null}
   </aside>;
 }

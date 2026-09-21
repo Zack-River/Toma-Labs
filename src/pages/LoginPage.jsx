@@ -3,6 +3,8 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthLayout } from '../components/auth/AuthLayout.jsx';
 import { useStorefront } from '../context/StorefrontContext.jsx';
 import { getSession, safeReturnPath, signIn } from '../lib/storefront-state.js';
+import { TomaIcon } from '../components/TomaIcon.jsx';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ export function LoginPage() {
     <p className="eyebrow">TOMA account / Sign in</p>
     <h2 id="auth-title">Welcome back<br /><em>to the ritual.</em></h2>
     <p className="auth-lede">Your saved blends and current bag stay together across the store.</p>
-    <div className="prototype-note"><span aria-hidden="true">i</span><p><strong>Demo account flow.</strong> This static MVP keeps your session on this device until a real auth service is connected.</p></div>
+    <div className="prototype-note"><TomaIcon icon={faCircleInfo} /><p><strong>Demo account flow.</strong> This static MVP keeps your session on this device until a real auth service is connected.</p></div>
     {existingSession ? <p className="field-help">Already signed in as {existingSession.email}. Signing in again will switch the demo session.</p> : null}
     <form className="auth-form" onSubmit={handleSubmit} noValidate>
       <div className="field"><label htmlFor="login-email">Email address</label><input id="login-email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" /></div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PAYMENT_METHODS } from '../../lib/whatsapp-checkout.js';
+import { TomaIcon } from '../TomaIcon.jsx';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export function CheckoutForm({ initialValues, error, onCancel, onSubmit }) {
   const [values, setValues] = useState(initialValues);
@@ -24,6 +26,6 @@ export function CheckoutForm({ initialValues, error, onCancel, onSubmit }) {
     <div className="checkout-field"><label htmlFor="checkout-payment">Payment method</label><select id="checkout-payment" name="paymentMethod" value={values.paymentMethod} onChange={handleChange} required><option value="" disabled>Choose a payment method</option>{PAYMENT_METHODS.map((option) => <option value={option.id} key={option.id}>{option.label}</option>)}</select></div>
     {error ? <p className="checkout-error" role="alert">{error}</p> : null}
     <p className="checkout-privacy">Your details are used to prepare this WhatsApp order message. TOMA will confirm availability, delivery, and the final total in chat.</p>
-    <div className="checkout-form-actions"><button className="checkout-button" type="submit">Continue in WhatsApp <span aria-hidden="true">↗</span></button><button className="checkout-cancel" type="button" onClick={onCancel}>Keep reviewing</button></div>
+    <div className="checkout-form-actions"><button className="checkout-button" type="submit">Continue in WhatsApp <TomaIcon icon={faArrowUpRightFromSquare} /></button><button className="checkout-cancel" type="button" onClick={onCancel}>Keep reviewing</button></div>
   </form>;
 }

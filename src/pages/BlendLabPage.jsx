@@ -13,6 +13,8 @@ import { StoreHeader } from '../components/StoreHeader.jsx';
 import { useStorefront } from '../context/StorefrontContext.jsx';
 import { useBlendBuilder } from '../hooks/useBlendBuilder.js';
 import { MVP_PRICING } from '../lib/pricing.js';
+import { TomaIcon } from '../components/TomaIcon.jsx';
+import { faArrowUpRightFromSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export function BlendLabPage() {
   const { addLine, saveCustomBlend, session, showToast } = useStorefront();
@@ -75,9 +77,9 @@ export function BlendLabPage() {
       </section>
       <section className="blend-guide-band" aria-label="TOMA Guide"><TomaGuide guide={guide} profile={profile} step={step} /></section>
       <section className="blend-summary-band" aria-label="Your blend summary"><BlendSummary draft={draft} labels={labels} quote={quote} onAdd={addBlendToBag} onShare={shareDraft} /></section>
-      {added ? <section className="confirmation" aria-live="polite"><div className="confirmation-mark" aria-hidden="true">✓</div><div><p className="eyebrow">Draft added</p><h2>Your blend is in the bag.</h2><p>We kept the recipe explicit so you know exactly what will be quoted.</p></div><div className="confirmation-actions"><Link className="button button-brass" to="/cart">View bag <span aria-hidden="true">↗</span></Link><button className="text-link muted" type="button" onClick={() => setAdded(false)}>Keep exploring</button></div></section> : null}
+    {added ? <section className="confirmation" aria-live="polite"><div className="confirmation-mark"><TomaIcon icon={faCheck} /></div><div><p className="eyebrow">Draft added</p><h2>Your blend is in the bag.</h2><p>We kept the recipe explicit so you know exactly what will be quoted.</p></div><div className="confirmation-actions"><Link className="button button-brass" to="/cart">View bag <TomaIcon icon={faArrowUpRightFromSquare} /></Link><button className="text-link muted" type="button" onClick={() => setAdded(false)}>Keep exploring</button></div></section> : null}
     </main>
     <StoreFooter />
-    <div className="mobile-cta" aria-label="Blend bag action"><div><span>Current quote</span><strong>{quote.priceLabel}</strong></div><button className="button" type="button" onClick={handleMobileAction}>{quote.valid ? 'Add my blend to bag' : 'Complete your blend'} <span aria-hidden="true">↗</span></button></div>
+    <div className="mobile-cta" aria-label="Blend bag action"><div><span>Current quote</span><strong>{quote.priceLabel}</strong></div><button className="button" type="button" onClick={handleMobileAction}>{quote.valid ? 'Add my blend to bag' : 'Complete your blend'} <TomaIcon icon={faArrowUpRightFromSquare} /></button></div>
   </div>;
 }

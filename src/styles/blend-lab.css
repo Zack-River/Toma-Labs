@@ -144,6 +144,8 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .text-link span { padding-left: 5px; font-size: 15px; }
 .text-link.muted { border-color: rgba(118, 97, 79, .45); color: var(--muted-dark); }
 .text-link:hover { color: var(--ink); }
+.text-link .toma-icon { padding-left: 5px; width: 15px; height: 15px; }
+.config-note .toma-icon { flex: 0 0 auto; color: var(--brass); width: 18px; height: 18px; line-height: 1; }
 
 .format-card { position: relative; display: grid; grid-template-columns: 50px 1fr auto; gap: 15px; align-items: center; padding: 22px; background: rgba(250, 245, 235, .58); border: 1px solid var(--brass); }
 .format-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--espresso); }

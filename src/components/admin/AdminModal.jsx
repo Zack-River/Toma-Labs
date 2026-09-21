@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { TomaIcon } from '../TomaIcon.jsx';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export function AdminModal({ title, eyebrow, children, footer, onClose }) {
   const closeRef = useRef(null);
@@ -14,7 +16,7 @@ export function AdminModal({ title, eyebrow, children, footer, onClose }) {
 
   return <div className="admin-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
-      <div className="admin-modal-header"><div><p className="admin-eyebrow">{eyebrow || 'TOMA / Admin'}</p><h2 id="admin-modal-title">{title}</h2></div><button ref={closeRef} className="admin-modal-close" type="button" onClick={onClose} aria-label="Close dialog">×</button></div>
+      <div className="admin-modal-header"><div><p className="admin-eyebrow">{eyebrow || 'TOMA / Admin'}</p><h2 id="admin-modal-title">{title}</h2></div><button ref={closeRef} className="admin-modal-close" type="button" onClick={onClose} aria-label="Close dialog"><TomaIcon icon={faXmark} /></button></div>
       <div className="admin-modal-body">{children}</div>
       {footer ? <div className="admin-modal-footer">{footer}</div> : null}
     </section>

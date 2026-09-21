@@ -66,3 +66,4 @@ body.admin-page { background: #f0e4d0; color: var(--ink); }
 .admin-inline-select { min-height: 32px; padding: 6px 7px; border: 1px solid rgba(90, 50, 30, .25); background: #fffaf1; color: var(--roast); font: 500 9px var(--mono); }
 .admin-color-value { display: inline-flex; align-items: center; gap: 7px; font: 9px var(--mono); }.admin-color-value i { display: inline-block; width: 13px; height: 13px; border: 1px solid rgba(21, 16, 13, .18); }
 @media (max-width: 760px) { .admin-context-bar { align-items: start; flex-direction: column; gap: 7px; margin-bottom: 28px; } }
+.admin-search .toma-icon { flex: 0 0 auto; margin-right: 6px; color: var(--roast); width: 18px; height: 18px; }

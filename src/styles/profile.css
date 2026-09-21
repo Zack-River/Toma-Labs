@@ -13,6 +13,8 @@
 @media (max-width: 900px) { .profile-main { width: calc(100% - 34px); padding-top: 48px; }.profile-hero { display: block; }.profile-identity { max-width: 430px; margin-top: 30px; }.profile-content-grid { grid-template-columns: 1fr; }.orders-panel, .most-ordered-panel { grid-column: auto; }.profile-product-grid { grid-template-columns: 1fr; }.profile-product-card { min-height: 112px; }.profile-footer { width: calc(100% - 34px); } }
 @media (max-width: 620px) { .profile-hero-copy h1 { font-size: 63px; }.profile-stats { grid-template-columns: 1fr 1fr; }.profile-stats > div:last-child { grid-column: 1 / -1; }.profile-panel { padding: 20px 17px; }.profile-panel-heading { display: block; }.profile-panel-note, .profile-live-mark { display: block; margin-top: 12px; }.profile-text-link { display: inline-block; margin-top: 15px; }.profile-blend-grid { grid-template-columns: 1fr; }.profile-blend-card { grid-template-columns: 105px 1fr; }.profile-order-row { align-items: start; }.profile-order-row strong { padding-top: 3px; font-size: 13px; }.profile-footer { flex-wrap: wrap; }.profile-footer span { order: 3; width: 100%; } }
 .profile-product-card { color: inherit; text-decoration: none; transition: transform .2s, border-color .2s; }.profile-product-card:hover, .profile-product-card:focus-visible { border-color: var(--brass); transform: translateY(-2px); }
+.profile-text-link .toma-icon { margin-left: 5px; width: 16px; height: 16px; }
+.profile-format-lock > .toma-icon { color: var(--brass-light); width: 17px; height: 17px; }
 
 /* Match the shared editorial shell used across the storefront */
 .profile-main { width: 100%; margin: 0; padding: 0 0 80px; }

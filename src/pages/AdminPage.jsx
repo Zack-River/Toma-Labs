@@ -4,6 +4,8 @@ import { ADMIN_TABS, AdminShell } from '../components/admin/AdminShell.jsx';
 import { AdminTable } from '../components/admin/AdminTable.jsx';
 import { AdminTrendChart } from '../components/admin/AdminTrendChart.jsx';
 import { useStorefront } from '../context/StorefrontContext.jsx';
+import { TomaIcon } from '../components/TomaIcon.jsx';
+import { faArrowUpRightFromSquare, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { createAdminId, formatAdminDate, formatCurrency, getAdminData, getAdminStats, getOrderStatusLabel, getRevenueSeries, getTopSoldProducts, ORDER_STATUSES, saveAdminData } from '../lib/admin-state.js';
 
 function StatusBadge({ status }) {
@@ -31,7 +33,7 @@ function OverviewTab({ data, stats, onOpenTab }) {
     <div className="admin-main-header"><div><p className="admin-eyebrow">TOMA / Admin overview</p><h2>Numbers with<br /><em>a direction.</em></h2></div><p className="admin-main-header-copy">A live-feeling MVP view of revenue, orders, customer activity, and the shelf. All amounts are shown in EGP.</p></div>
     <div className="admin-stat-grid"><StatCard label="Revenue" value={formatCurrency(stats.revenue)} note={`Average ${formatCurrency(stats.averageOrderValue)} / completed order`} accent /><StatCard label="Total orders" value={stats.totalOrders} note="Across all order states" /><StatCard label="Completed" value={stats.completedOrders} note="Ready to count as revenue" /><StatCard label="Pending" value={stats.pendingOrders} note={`${formatCurrency(stats.pendingValue)} awaiting action`} /><StatCard label="Canceled" value={stats.canceledOrders} note="Keep an eye on the reason" /></div>
     <div className="admin-dashboard-grid"><section className="admin-panel"><div className="admin-panel-heading"><div><p className="admin-eyebrow">Completed order value</p><h3>Revenue trend.</h3></div><span className="admin-link">EGP / monthly</span></div><AdminTrendChart series={series} /></section><section className="admin-panel admin-panel-dark"><div className="admin-panel-heading"><div><p className="admin-eyebrow">Order health</p><h3>Current mix.</h3></div><span className="admin-link">{stats.totalOrders} total</span></div><div className="admin-order-mix">{orderMix.map((item) => <div className="admin-mix-row" key={item.id}><span>{item.label}</span><div className="admin-mix-track"><i style={{ width: `${(item.count / maxMix) * 100}%` }}></i></div><strong>{item.count}</strong></div>)}</div></section></div>
-    <section className="admin-panel"><div className="admin-panel-heading"><div><p className="admin-eyebrow">Shelf performance</p><h3>Top selling products.</h3></div><button className="admin-button admin-button-ghost admin-button-small" type="button" onClick={() => onOpenTab('products')}>Manage products ↗</button></div><div className="admin-top-products">{topProducts.length ? topProducts.map((item, index) => <div className="admin-top-product" key={item.productId}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{item.name}</strong><small>{item.type === 'bundle' ? 'Bundle' : 'Ready-made product'} · {formatCurrency(item.revenue)} revenue</small></div><b>{item.quantity} sold</b></div>) : <p className="admin-confirm-copy">No completed sales yet.</p>}</div></section>
+    <section className="admin-panel"><div className="admin-panel-heading"><div><p className="admin-eyebrow">Shelf performance</p><h3>Top selling products.</h3></div><button className="admin-button admin-button-ghost admin-button-small" type="button" onClick={() => onOpenTab('products')}>Manage products <TomaIcon icon={faArrowUpRightFromSquare} /></button></div><div className="admin-top-products">{topProducts.length ? topProducts.map((item, index) => <div className="admin-top-product" key={item.productId}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{item.name}</strong><small>{item.type === 'bundle' ? 'Bundle' : 'Ready-made product'} · {formatCurrency(item.revenue)} revenue</small></div><b>{item.quantity} sold</b></div>) : <p className="admin-confirm-copy">No completed sales yet.</p>}</div></section>
   </>;
 }
 
@@ -48,7 +50,7 @@ function OrdersTab({ orders, onStatusChange }) {
     { key: 'status', label: 'Status', render: (order) => <StatusBadge status={order.status} /> },
     { key: 'action', label: 'Update', render: (order) => <select className="admin-inline-select" aria-label={`Change status for ${order.id}`} value={order.status} onChange={(event) => onStatusChange(order, event.target.value)}>{ORDER_STATUSES.map((status) => <option value={status.id} key={status.id}>{status.label}</option>)}</select> },
   ];
-  return <><SectionHeader eyebrow="TOMA / Order lifecycle" title="Orders." copy="Move orders through pending, completed, and canceled states with a confirmation step." /><div className="admin-section-toolbar"><div className="admin-filter-row">{filters.map((item) => <button className={`admin-filter${filter === item.id ? ' is-active' : ''}`} type="button" key={item.id} onClick={() => setFilter(item.id)}>{item.label} · {item.count}</button>)}</div><label className="admin-search"><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search orders" aria-label="Search orders" /></label></div><AdminTable columns={columns} rows={visibleOrders} emptyMessage="No orders match this view." /></>;
+  return <><SectionHeader eyebrow="TOMA / Order lifecycle" title="Orders." copy="Move orders through pending, completed, and canceled states with a confirmation step." /><div className="admin-section-toolbar"><div className="admin-filter-row">{filters.map((item) => <button className={`admin-filter${filter === item.id ? ' is-active' : ''}`} type="button" key={item.id} onClick={() => setFilter(item.id)}>{item.label} · {item.count}</button>)}</div><label className="admin-search"><TomaIcon icon={faMagnifyingGlass} /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search orders" aria-label="Search orders" /></label></div><AdminTable columns={columns} rows={visibleOrders} emptyMessage="No orders match this view." /></>;
 }
 
 function AccountsTab({ accounts, orders, onCreate, onEdit }) {
@@ -61,7 +63,7 @@ function AccountsTab({ accounts, orders, onCreate, onEdit }) {
     { key: 'status', label: 'Status', render: (client) => <StatusBadge status={client.status} /> },
     { key: 'action', label: 'Action', render: (client) => <button className="admin-button admin-button-ghost admin-button-small" type="button" onClick={() => onEdit(client)}>Edit details</button> },
   ];
-  return <><SectionHeader eyebrow="TOMA / Customer records" title="Accounts & clients." copy="Keep the people behind the orders easy to understand and ready for a follow-up." action={<button className="admin-button admin-button-primary" type="button" onClick={onCreate}>+ Add client</button>} /><AdminTable columns={columns} rows={accounts} emptyMessage="No client accounts yet." /></>;
+  return <><SectionHeader eyebrow="TOMA / Customer records" title="Accounts & clients." copy="Keep the people behind the orders easy to understand and ready for a follow-up." action={<button className="admin-button admin-button-primary" type="button" onClick={onCreate}><TomaIcon icon={faPlus} /> Add client</button>} /><AdminTable columns={columns} rows={accounts} emptyMessage="No client accounts yet." /></>;
 }
 
 function ProductsTab({ products, categories, onCreate, onEdit, onDelete }) {
@@ -75,7 +77,7 @@ function ProductsTab({ products, categories, onCreate, onEdit, onDelete }) {
     { key: 'pack', label: 'Pack', render: (product) => <span>{product.sizeLabel || `${product.packSizeGrams}g`}</span> },
     { key: 'action', label: 'Action', render: (product) => <div className="admin-row-actions"><button className="admin-button admin-button-ghost admin-button-small" type="button" onClick={() => onEdit(product)}>Edit</button><button className="admin-button admin-button-danger admin-button-small" type="button" onClick={() => onDelete(product)}>Delete</button></div> },
   ];
-  return <><SectionHeader eyebrow="TOMA / Ready-made shelf" title="Products." copy="Edit what customers see on the ready-made shelf, including pricing and pack details." action={<div className="admin-actions"><label className="admin-search"><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products" aria-label="Search products" /></label><button className="admin-button admin-button-primary" type="button" onClick={onCreate}>+ Add product</button></div>} /><AdminTable columns={columns} rows={visible} emptyMessage="No products match this search." /></>;
+  return <><SectionHeader eyebrow="TOMA / Ready-made shelf" title="Products." copy="Edit what customers see on the ready-made shelf, including pricing and pack details." action={<div className="admin-actions"><label className="admin-search"><TomaIcon icon={faMagnifyingGlass} /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products" aria-label="Search products" /></label><button className="admin-button admin-button-primary" type="button" onClick={onCreate}><TomaIcon icon={faPlus} /> Add product</button></div>} /><AdminTable columns={columns} rows={visible} emptyMessage="No products match this search." /></>;
 }
 
 function BundlesTab({ bundles, onCreate, onEdit, onDelete }) {
@@ -86,7 +88,7 @@ function BundlesTab({ bundles, onCreate, onEdit, onDelete }) {
     { key: 'badge', label: 'Shelf label', render: (bundle) => <span>{bundle.badge}</span> },
     { key: 'action', label: 'Action', render: (bundle) => <div className="admin-row-actions"><button className="admin-button admin-button-ghost admin-button-small" type="button" onClick={() => onEdit(bundle)}>Edit</button><button className="admin-button admin-button-danger admin-button-small" type="button" onClick={() => onDelete(bundle)}>Delete</button></div> },
   ];
-  return <><SectionHeader eyebrow="TOMA / Packages & offers" title="Bundles." copy="Shape the reasons to buy more than one cup together." action={<button className="admin-button admin-button-primary" type="button" onClick={onCreate}>+ Add bundle</button>} /><AdminTable columns={columns} rows={bundles} emptyMessage="No bundles yet." /></>;
+  return <><SectionHeader eyebrow="TOMA / Packages & offers" title="Bundles." copy="Shape the reasons to buy more than one cup together." action={<button className="admin-button admin-button-primary" type="button" onClick={onCreate}><TomaIcon icon={faPlus} /> Add bundle</button>} /><AdminTable columns={columns} rows={bundles} emptyMessage="No bundles yet." /></>;
 }
 
 function CategoriesTab({ categories, products, onCreate, onEdit, onDelete }) {
@@ -97,7 +99,7 @@ function CategoriesTab({ categories, products, onCreate, onEdit, onDelete }) {
     { key: 'tone', label: 'Tone', render: (category) => <span className="admin-color-value"><i style={{ background: category.tone }}></i>{category.tone}</span> },
     { key: 'action', label: 'Action', render: (category) => <div className="admin-row-actions"><button className="admin-button admin-button-ghost admin-button-small" type="button" onClick={() => onEdit(category)}>Edit</button><button className="admin-button admin-button-danger admin-button-small" type="button" onClick={() => onDelete(category)}>Delete</button></div> },
   ];
-  return <><SectionHeader eyebrow="TOMA / Shelf directions" title="Categories." copy="Keep the navigation vocabulary aligned with the products customers can actually buy." action={<button className="admin-button admin-button-primary" type="button" onClick={onCreate}>+ Add category</button>} /><AdminTable columns={columns} rows={categories} emptyMessage="No categories yet." /></>;
+  return <><SectionHeader eyebrow="TOMA / Shelf directions" title="Categories." copy="Keep the navigation vocabulary aligned with the products customers can actually buy." action={<button className="admin-button admin-button-primary" type="button" onClick={onCreate}><TomaIcon icon={faPlus} /> Add category</button>} /><AdminTable columns={columns} rows={categories} emptyMessage="No categories yet." /></>;
 }
 
 function EntityField({ label, value, onChange, type = 'text', full = false, options = [], placeholder }) {
