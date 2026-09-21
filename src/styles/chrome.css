@@ -7,12 +7,12 @@
   background: var(--espresso);
   color: var(--cream);
   border-bottom: 1px solid rgba(250, 245, 235, .16);
-  transition: background .2s, backdrop-filter .2s;
+  transition: background .2s;
 }
 
 .toma-header.is-scrolled {
-  background: rgba(29, 18, 14, .84);
-  backdrop-filter: blur(14px);
+  background: var(--espresso);
+  backdrop-filter: none;
 }
 
 html { scroll-padding-top: 82px; }

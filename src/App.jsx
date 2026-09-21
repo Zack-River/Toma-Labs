@@ -1,18 +1,24 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ToastRegion } from './components/ToastRegion.jsx';
 import { FaqBot } from './components/FaqBot.jsx';
-import { CartPage } from './pages/CartPage.jsx';
 import { HomePage } from './pages/HomePage.jsx';
-import { LoginPage } from './pages/LoginPage.jsx';
-import { SignupPage } from './pages/SignupPage.jsx';
-import { BlendLabPage } from './pages/BlendLabPage.jsx';
-import { ProfilePage } from './pages/ProfilePage.jsx';
-import { ShopPage } from './pages/ShopPage.jsx';
-import { FindYourCoffeePage } from './pages/FindYourCoffeePage.jsx';
-import { WhyTomaPage } from './pages/WhyTomaPage.jsx';
-import { ProductPage } from './pages/ProductPage.jsx';
-import { AdminPage } from './pages/AdminPage.jsx';
+
+const lazyPage = (load, exportName) => lazy(() => load().then((module) => ({ default: module[exportName] })));
+const CartPage = lazyPage(() => import('./pages/CartPage.jsx'), 'CartPage');
+const LoginPage = lazyPage(() => import('./pages/LoginPage.jsx'), 'LoginPage');
+const SignupPage = lazyPage(() => import('./pages/SignupPage.jsx'), 'SignupPage');
+const BlendLabPage = lazyPage(() => import('./pages/BlendLabPage.jsx'), 'BlendLabPage');
+const ProfilePage = lazyPage(() => import('./pages/ProfilePage.jsx'), 'ProfilePage');
+const ShopPage = lazyPage(() => import('./pages/ShopPage.jsx'), 'ShopPage');
+const FindYourCoffeePage = lazyPage(() => import('./pages/FindYourCoffeePage.jsx'), 'FindYourCoffeePage');
+const WhyTomaPage = lazyPage(() => import('./pages/WhyTomaPage.jsx'), 'WhyTomaPage');
+const ProductPage = lazyPage(() => import('./pages/ProductPage.jsx'), 'ProductPage');
+const AdminPage = lazyPage(() => import('./pages/AdminPage.jsx'), 'AdminPage');
+
+function RouteLoading() {
+  return <div className="route-loading" role="status" aria-live="polite">Loading TOMA…</div>;
+}
 
 function PageChrome() {
   const location = useLocation();
@@ -46,20 +52,22 @@ function PageChrome() {
   }, [location.pathname]);
 
   return <>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/shop" element={<ShopPage />} />
-      <Route path="/blend-lab" element={<BlendLabPage />} />
-      <Route path="/find-your-coffee" element={<FindYourCoffeePage />} />
-      <Route path="/why-toma" element={<WhyTomaPage />} />
-      <Route path="/product/:productId" element={<ProductPage />} />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <Suspense fallback={<RouteLoading />}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/blend-lab" element={<BlendLabPage />} />
+        <Route path="/find-your-coffee" element={<FindYourCoffeePage />} />
+        <Route path="/why-toma" element={<WhyTomaPage />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
     <FaqBot />
     <ToastRegion />
   </>;

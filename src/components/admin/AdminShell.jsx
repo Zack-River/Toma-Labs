@@ -12,7 +12,7 @@ export const ADMIN_TABS = Object.freeze([
 export function AdminShell({ activeTab, onTabChange, children }) {
   return <div className="admin-shell">
     <aside className="admin-sidebar">
-      <Link className="admin-brand" to="/"><img src="/assets/toma-bean-mark.png" alt="" /><span>toma</span></Link>
+      <Link className="admin-brand" to="/"><img src="/assets/toma-bean-mark-128.png" width="128" height="128" alt="" /><span>toma</span></Link>
       <div className="admin-sidebar-heading"><p className="admin-eyebrow">TOMA / Workspace</p><h1>Admin<br /><em>desk.</em></h1></div>
       <nav className="admin-tab-list" aria-label="Admin sections" role="tablist">
         {ADMIN_TABS.map((tab) => <button className={`admin-tab${activeTab === tab.id ? ' is-active' : ''}`} type="button" role="tab" aria-selected={activeTab === tab.id} key={tab.id} onClick={() => onTabChange(tab.id)}><span>{tab.label}</span><small>{tab.shortLabel}</small></button>)}
